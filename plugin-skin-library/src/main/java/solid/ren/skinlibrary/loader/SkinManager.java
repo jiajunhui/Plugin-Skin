@@ -47,6 +47,7 @@ public class SkinManager implements ISkinLoader {
     private String skinPackageName;
     //the skin plugin path
     private String skinPath;
+    private boolean intentChangeSkin;
 
     private SkinManager() {
 
@@ -55,6 +56,10 @@ public class SkinManager implements ISkinLoader {
     public void init(Context ctx) {
         context = ctx.getApplicationContext();
         TypefaceUtils.CURRENT_TYPEFACE = TypefaceUtils.getTypeface(context);
+    }
+
+    public boolean isIntentChangeSkin() {
+        return intentChangeSkin;
     }
 
     public Context getContext() {
@@ -144,9 +149,11 @@ public class SkinManager implements ISkinLoader {
     @Override
     public void notifySkinUpdate() {
         if (mSkinObservers == null) return;
+        intentChangeSkin = true;
         for (ISkinUpdate observer : mSkinObservers) {
             observer.onThemeUpdate();
         }
+        intentChangeSkin = false;
     }
 
     public void loadSkin() {

@@ -28,10 +28,15 @@ public class BackgroundAttr extends SkinAttr {
                 cardView.setCardBackgroundColor(color);
             } else {
                 //original author use this method set background color .
-                //old method , //view.setBackgroundColor(color);
+                //view.setBackgroundColor(color);
 
-                //modify this method change color animation.
-                AnimatorUtils.showBackgroundColorAnimation(view, getPreColor(view),color,500);
+                //this method change color animation.
+                //AnimatorUtils.showBackgroundColorAnimation(view, getPreColor(view),color,500);
+                if(SkinManager.getInstance().isIntentChangeSkin()){
+                    AnimatorUtils.showBackgroundColorAnimation(view, getPreColor(view),color,500);
+                }else{
+                    view.setBackgroundColor(color);
+                }
             }
         } else if (RES_TYPE_NAME_DRAWABLE.equals(attrValueTypeName)) {
             Drawable bg = SkinManager.getInstance().getDrawable(attrValueRefId);

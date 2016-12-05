@@ -1,6 +1,5 @@
 package com.kk.taurus.pluginskin;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -8,12 +7,12 @@ import solid.ren.skinlibrary.base.SkinBaseActivity;
 import solid.ren.skinlibrary.listener.ILoaderListener;
 import solid.ren.skinlibrary.loader.SkinManager;
 
-public class MainActivity extends SkinBaseActivity {
+public class SecondActivity extends SkinBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_second);
 
         findViewById(R.id.tv_change).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,14 +66,6 @@ public class MainActivity extends SkinBaseActivity {
             @Override
             public void onClick(View view) {
                 SkinManager.getInstance().loadFont(null);
-            }
-        });
-
-        findViewById(R.id.tv_next_page).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),SecondActivity.class);
-                startActivity(intent);
             }
         });
     }

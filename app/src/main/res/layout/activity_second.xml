@@ -69,17 +69,6 @@
         android:text="默认字体"/>
 
     <TextView
-        android:id="@+id/tv_next_page"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#44000000"
-        android:layout_marginTop="5dp"
-        android:gravity="center"
-        android:textSize="16sp"
-        android:textColor="#000000"
-        android:text="下一个页面"/>
-
-    <TextView
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="center"
