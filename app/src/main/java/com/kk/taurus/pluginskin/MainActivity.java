@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.xapp.jjh.logtools.tools.XLog;
+
 import solid.ren.skinlibrary.base.SkinBaseActivity;
 import solid.ren.skinlibrary.listener.ILoaderListener;
 import solid.ren.skinlibrary.loader.SkinManager;
@@ -26,7 +28,8 @@ public class MainActivity extends SkinBaseActivity {
 
                     @Override
                     public void onSuccess() {
-
+                        int color = SkinManager.getInstance().getColorByResName("tv_test_layout_bg");
+                        XLog.d("color = " + Integer.toHexString(color));
                     }
 
                     @Override
@@ -78,4 +81,5 @@ public class MainActivity extends SkinBaseActivity {
             }
         });
     }
+
 }

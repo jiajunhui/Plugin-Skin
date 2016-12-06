@@ -10,6 +10,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.text.TextUtils;
 
 import com.thin.downloadmanager.DefaultRetryPolicy;
 import com.thin.downloadmanager.DownloadRequest;
@@ -193,18 +194,12 @@ public class SkinManager implements ISkinLoader {
                 try {
                     if (params.length == 1) {
                         String skinPkgPath = SkinFileUtils.getSkinDir(context) + File.separator + params[0];
-                        SkinL.i("skinPkgPath", skinPkgPath);
-                        File file = new File(skinPkgPath);
-                        if (file == null || !file.exists()) {
-                            return null;
-                        }
-                        PackageManager mPm = context.getPackageManager();
-                        PackageInfo mInfo = mPm.getPackageArchiveInfo(skinPkgPath, PackageManager.GET_ACTIVITIES);
-                        skinPackageName = mInfo.packageName;
+
+                        skinPackageName = getSkinPackageName(params[0]);
+
                         AssetManager assetManager = AssetManager.class.newInstance();
                         Method addAssetPath = assetManager.getClass().getMethod("addAssetPath", String.class);
                         addAssetPath.invoke(assetManager, skinPkgPath);
-
 
                         Resources superRes = context.getResources();
                         Resources skinResource = new Resources(assetManager, superRes.getDisplayMetrics(), superRes.getConfiguration());
@@ -237,6 +232,23 @@ public class SkinManager implements ISkinLoader {
         }.execute(skinName);
     }
 
+    /**
+     * get the skin resource package name.
+     * @param skinName the skin file name.
+     * @return
+     */
+    public String getSkinPackageName(String skinName){
+        if(TextUtils.isEmpty(skinName)) return null;
+        String skinPkgPath = SkinFileUtils.getSkinDir(context) + File.separator + skinName;
+        SkinL.i("skinPkgPath", skinPkgPath);
+        File file = new File(skinPkgPath);
+        if (file == null || !file.exists()) {
+            return null;
+        }
+        PackageManager mPm = context.getPackageManager();
+        PackageInfo mInfo = mPm.getPackageArchiveInfo(skinPkgPath, PackageManager.GET_ACTIVITIES);
+        return mInfo.packageName;
+    }
 
     /**
      * load skin form internet
@@ -293,6 +305,19 @@ public class SkinManager implements ISkinLoader {
         TextViewRepository.applyFont(tf);
     }
 
+    public int getColorByResName(String resName){
+        if(mResources == null || TextUtils.isEmpty(skinPackageName))
+            return 0;
+        int trueResId = mResources.getIdentifier(resName, "color", skinPackageName);
+        int trueColor = 0;
+        try {
+            trueColor = mResources.getColor(trueResId);
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+        return trueColor;
+    }
+
     public int getColor(int resId) {
         int originColor = context.getResources().getColor(resId);
         if (mResources == null || isDefaultSkin) {
@@ -301,17 +326,7 @@ public class SkinManager implements ISkinLoader {
 
         String resName = context.getResources().getResourceEntryName(resId);
 
-        int trueResId = mResources.getIdentifier(resName, "color", skinPackageName);
-        int trueColor = 0;
-
-        try {
-            trueColor = mResources.getColor(trueResId);
-        } catch (Resources.NotFoundException e) {
-            e.printStackTrace();
-            trueColor = originColor;
-        }
-
-        return trueColor;
+        return getColorByResName(resName);
     }
 
     public int getSrcResId(int resId) {
