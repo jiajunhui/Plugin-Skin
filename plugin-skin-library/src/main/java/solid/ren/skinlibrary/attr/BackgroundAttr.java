@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import solid.ren.skinlibrary.attr.base.SkinAttr;
+import solid.ren.skinlibrary.config.SkinConfig;
 import solid.ren.skinlibrary.loader.SkinManager;
 import solid.ren.skinlibrary.utils.AnimatorUtils;
 
@@ -32,7 +33,7 @@ public class BackgroundAttr extends SkinAttr {
 
                 //this method change color animation.
                 //AnimatorUtils.showBackgroundColorAnimation(view, getPreColor(view),color,500);
-                if(SkinManager.getInstance().isIntentChangeSkin()){
+                if(SkinManager.getInstance().isIntentChangeSkin() && SkinConfig.isGradientChangeColor()){
                     AnimatorUtils.showBackgroundColorAnimation(view, getPreColor(view),color,500);
                 }else{
                     view.setBackgroundColor(color);

@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.thin.downloadmanager.DefaultRetryPolicy;
 import com.thin.downloadmanager.DownloadRequest;
@@ -22,7 +23,9 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import solid.ren.skinlibrary.attr.ResourceType;
 import solid.ren.skinlibrary.config.SkinConfig;
+import solid.ren.skinlibrary.config.StatusConfig;
 import solid.ren.skinlibrary.listener.ILoaderListener;
 import solid.ren.skinlibrary.listener.ISkinLoader;
 import solid.ren.skinlibrary.listener.ISkinUpdate;
@@ -69,11 +72,29 @@ public class SkinManager implements ISkinLoader {
 
     public int getColorPrimaryDark() {
         if (mResources != null) {
-            int identify = mResources.getIdentifier("colorPrimaryDark", "color", skinPackageName);
-            if (!(identify <= 0))
+            int identify = mResources.getIdentifier(StatusConfig.KEY_STATUS_BAR_COLOR, ResourceType.Color.getStr(), skinPackageName);
+            if (!(identify <= 0)){
                 return mResources.getColor(identify);
+            }else{
+                return getDefaultColor(StatusConfig.KEY_STATUS_BAR_COLOR);
+            }
         }
         return -1;
+    }
+
+    public int getDefaultColor(String resName){
+        Resources resources = context.getResources();
+        int identify = resources.getIdentifier(resName,ResourceType.Color.getStr(),context.getPackageName());
+        try {
+            return resources.getColor(identify);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public boolean getDarkStatus(){
+        return getBool(StatusConfig.KEY_DARK_STATUS);
     }
 
     /**
@@ -159,6 +180,10 @@ public class SkinManager implements ISkinLoader {
 
     public void loadSkin() {
         String skin = SkinConfig.getCustomSkinPath(context);
+        if(SkinConfig.DEFAULT_SKIN.equals(skin)){
+            skinPackageName = context.getPackageName();
+            mResources = context.getResources();
+        }
         loadSkin(skin, null);
     }
 
@@ -180,45 +205,35 @@ public class SkinManager implements ISkinLoader {
      * @param callback load Callback
      */
     public void loadSkin(String skinName, final ILoaderListener callback) {
+        if (callback != null) {
+            callback.onStart();
+        }
+        try {
+            if (!TextUtils.isEmpty(skinName)) {
+                String skinPkgPath = SkinFileUtils.getSkinDir(context) + File.separator + skinName;
 
-        new AsyncTask<String, Void, Resources>() {
+                String _skinPackageName = getSkinPackageName(skinName);
 
-            protected void onPreExecute() {
-                if (callback != null) {
-                    callback.onStart();
+                if(_skinPackageName==null){
+                    isDefaultSkin = true;
+                    if (callback != null) callback.onFailed("没有获取到资源");
+                    return;
                 }
-            }
 
-            @Override
-            protected Resources doInBackground(String... params) {
-                try {
-                    if (params.length == 1) {
-                        String skinPkgPath = SkinFileUtils.getSkinDir(context) + File.separator + params[0];
+                skinPackageName = _skinPackageName;
 
-                        skinPackageName = getSkinPackageName(params[0]);
+                AssetManager assetManager = AssetManager.class.newInstance();
+                Method addAssetPath = assetManager.getClass().getMethod("addAssetPath", String.class);
+                addAssetPath.invoke(assetManager, skinPkgPath);
 
-                        AssetManager assetManager = AssetManager.class.newInstance();
-                        Method addAssetPath = assetManager.getClass().getMethod("addAssetPath", String.class);
-                        addAssetPath.invoke(assetManager, skinPkgPath);
+                Resources superRes = context.getResources();
+                Resources skinResource = new Resources(assetManager, superRes.getDisplayMetrics(), superRes.getConfiguration());
 
-                        Resources superRes = context.getResources();
-                        Resources skinResource = new Resources(assetManager, superRes.getDisplayMetrics(), superRes.getConfiguration());
+                SkinConfig.saveSkinPath(context, skinName);
 
-                        SkinConfig.saveSkinPath(context, params[0]);
-
-                        skinPath = skinPkgPath;
-                        isDefaultSkin = false;
-                        return skinResource;
-                    }
-                    return null;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    return null;
-                }
-            }
-
-            protected void onPostExecute(Resources result) {
-                mResources = result;
+                skinPath = skinPkgPath;
+                isDefaultSkin = false;
+                mResources = skinResource;
 
                 if (mResources != null) {
                     if (callback != null) callback.onSuccess();
@@ -227,9 +242,13 @@ public class SkinManager implements ISkinLoader {
                     isDefaultSkin = true;
                     if (callback != null) callback.onFailed("没有获取到资源");
                 }
+            }else{
+                isDefaultSkin = true;
+                if (callback != null) callback.onFailed("没有获取到资源");
             }
-
-        }.execute(skinName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -306,9 +325,11 @@ public class SkinManager implements ISkinLoader {
     }
 
     public int getColorByResName(String resName){
-        if(mResources == null || TextUtils.isEmpty(skinPackageName))
-            return 0;
-        int trueResId = mResources.getIdentifier(resName, "color", skinPackageName);
+        if(mResources == null || isDefaultSkin){
+            int originColor = context.getResources().getIdentifier(resName,ResourceType.Color.getStr(),skinPackageName);
+            return originColor;
+        }
+        int trueResId = mResources.getIdentifier(resName, ResourceType.Color.getStr(), skinPackageName);
         int trueColor = 0;
         try {
             trueColor = mResources.getColor(trueResId);
@@ -329,25 +350,19 @@ public class SkinManager implements ISkinLoader {
         return getColorByResName(resName);
     }
 
-    public int getSrcResId(int resId) {
-        int originColor = context.getResources().getColor(resId);
-        if (mResources == null || isDefaultSkin) {
-            return originColor;
+
+    public boolean getBool(String resName) {
+        if(mResources == null || skinPackageName == null){
+            return false;
         }
-
-        String resName = context.getResources().getResourceEntryName(resId);
-
-        int trueResId = mResources.getIdentifier(resName, "color", skinPackageName);
-        int trueColor = 0;
-
-        try {
-            trueColor = mResources.getColor(trueResId);
-        } catch (Resources.NotFoundException e) {
+        int id = mResources.getIdentifier(resName,ResourceType.Bool.getStr(),skinPackageName);
+        boolean result = false;
+        try{
+            result = mResources.getBoolean(id);
+        }catch (Exception e){
             e.printStackTrace();
-            trueColor = originColor;
         }
-
-        return trueColor;
+        return result;
     }
 
     public Drawable getDrawable(int resId) {
@@ -357,7 +372,7 @@ public class SkinManager implements ISkinLoader {
         }
         String resName = context.getResources().getResourceEntryName(resId);
 
-        int trueResId = mResources.getIdentifier(resName, "drawable", skinPackageName);
+        int trueResId = mResources.getIdentifier(resName, ResourceType.Drawable.getStr(), skinPackageName);
 
         Drawable trueDrawable = null;
         try {
@@ -394,7 +409,7 @@ public class SkinManager implements ISkinLoader {
 
         String resName = context.getResources().getResourceEntryName(resId);
         if (isExtendSkin) {
-            int trueResId = mResources.getIdentifier(resName, "color", skinPackageName);
+            int trueResId = mResources.getIdentifier(resName, ResourceType.Color.getStr(), skinPackageName);
             ColorStateList trueColorList = null;
             //If the package is not the skin of carbon resources,
             // but the need to determine whether it is ColorStateList

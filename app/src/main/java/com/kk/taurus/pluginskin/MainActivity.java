@@ -2,6 +2,7 @@ package com.kk.taurus.pluginskin;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 
 import com.xapp.jjh.logtools.tools.XLog;
@@ -16,6 +17,16 @@ public class MainActivity extends SkinBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        boolean darkStatus = SkinManager.getInstance().getBool("dark_status");
+        XLog.d("dark_status = " + darkStatus);
+
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//            }
+//        },500);
 
         findViewById(R.id.tv_change).setOnClickListener(new View.OnClickListener() {
             @Override

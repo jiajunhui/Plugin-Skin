@@ -5,6 +5,8 @@
     <color name="colorAccent">#FF4081</color>
 
 
+    <bool name="dark_status">false</bool>
+    <color name="status_bar_color">#303F9F</color>
     <color name="tv_test_bg">#aaaaaa</color>
     <color name="tv_test_layout_bg">#eeeeee</color>
     <color name="tv_test_text_color">#0000ff</color>
