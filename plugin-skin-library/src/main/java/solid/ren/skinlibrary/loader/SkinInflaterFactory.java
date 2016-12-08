@@ -8,10 +8,8 @@ import android.support.v7.app.AppCompatDelegate;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import solid.ren.skinlibrary.attr.base.AttrFactory;
 import solid.ren.skinlibrary.attr.base.DynamicAttr;
 import solid.ren.skinlibrary.attr.base.SkinAttr;
@@ -34,7 +32,7 @@ public class SkinInflaterFactory implements LayoutInflaterFactory {
     /**
      * Storage of View and its attrs, which have skin changes
      */
-    private List<SkinItem> mSkinItems = new ArrayList<SkinItem>();
+    private List<SkinItem> mSkinItems = new ArrayList<>();
 
     private AppCompatActivity mAppCompatActivity;
 

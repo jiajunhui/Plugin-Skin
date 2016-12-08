@@ -9,20 +9,15 @@ import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.text.TextUtils;
-import android.util.Log;
-
 import com.thin.downloadmanager.DefaultRetryPolicy;
 import com.thin.downloadmanager.DownloadRequest;
 import com.thin.downloadmanager.DownloadStatusListenerV1;
 import com.thin.downloadmanager.ThinDownloadManager;
-
 import java.io.File;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-
 import solid.ren.skinlibrary.attr.ResourceType;
 import solid.ren.skinlibrary.config.SkinConfig;
 import solid.ren.skinlibrary.config.StatusConfig;
@@ -51,6 +46,7 @@ public class SkinManager implements ISkinLoader {
     private String skinPackageName;
     //the skin plugin path
     private String skinPath;
+    //will be operation change skin ?
     private boolean intentChangeSkin;
 
     private SkinManager() {
@@ -70,6 +66,10 @@ public class SkinManager implements ISkinLoader {
         return context;
     }
 
+    /**
+     * get the status bar color
+     * @return
+     */
     public int getColorPrimaryDark() {
         if (mResources != null) {
             int identify = mResources.getIdentifier(StatusConfig.KEY_STATUS_BAR_COLOR, ResourceType.Color.getStr(), skinPackageName);
@@ -82,6 +82,11 @@ public class SkinManager implements ISkinLoader {
         return -1;
     }
 
+    /**
+     * get default resource color by resource name.
+     * @param resName
+     * @return
+     */
     public int getDefaultColor(String resName){
         Resources resources = context.getResources();
         int identify = resources.getIdentifier(resName,ResourceType.Color.getStr(),context.getPackageName());
@@ -93,6 +98,10 @@ public class SkinManager implements ISkinLoader {
         return -1;
     }
 
+    /**
+     * is use dark status on status bar for Android M.
+     * @return
+     */
     public boolean getDarkStatus(){
         return getBool(StatusConfig.KEY_DARK_STATUS);
     }
@@ -324,6 +333,11 @@ public class SkinManager implements ISkinLoader {
         TextViewRepository.applyFont(tf);
     }
 
+    /**
+     * in current resource , get color by resource name.
+     * @param resName
+     * @return if resource null , return default resource color.
+     */
     public int getColorByResName(String resName){
         if(mResources == null || isDefaultSkin){
             int originColor = context.getResources().getIdentifier(resName,ResourceType.Color.getStr(),skinPackageName);
@@ -339,6 +353,11 @@ public class SkinManager implements ISkinLoader {
         return trueColor;
     }
 
+    /**
+     * in current resource , get color by resource id.
+     * @param resId
+     * @return if resource null , return default resource color.
+     */
     public int getColor(int resId) {
         int originColor = context.getResources().getColor(resId);
         if (mResources == null || isDefaultSkin) {
@@ -350,7 +369,11 @@ public class SkinManager implements ISkinLoader {
         return getColorByResName(resName);
     }
 
-
+    /**
+     * in current resource , get bool value by resource name.
+     * @param resName
+     * @return if resource null , return false.
+     */
     public boolean getBool(String resName) {
         if(mResources == null || skinPackageName == null){
             return false;
@@ -365,6 +388,11 @@ public class SkinManager implements ISkinLoader {
         return result;
     }
 
+    /**
+     * in current resource , get drawable by resource id.
+     * @param resId
+     * @return if resource null , return default resource drawable.
+     */
     public Drawable getDrawable(int resId) {
         Drawable originDrawable = context.getResources().getDrawable(resId);
         if (mResources == null || isDefaultSkin) {

@@ -22,7 +22,9 @@ public class SkinConfig {
 
     public static final String SKIN_DIR_NAME = "skin";
     public static final String FONT_DIR_NAME = "fonts";
+    /** is need change status bar color*/
     private static boolean isCanChangeStatusColor = true;
+    /** is need gradient on change skin color , not include status bar color .*/
     private static boolean isGradientChangeColor = false;
 
     /**
