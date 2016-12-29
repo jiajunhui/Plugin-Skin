@@ -118,7 +118,15 @@
                 android:layout_marginTop="30dp"
                 skin:enable="true"
                 android:scaleType="centerInside"
-                android:src="@mipmap/ic_launcher_test_icon"/>
+                android:src="@mipmap/ic_launcher_test_icon_patch"/>
+
+            <ProgressBar
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:indeterminateDuration="600"
+                skin:enable="true"
+                android:indeterminateDrawable="@drawable/draw_dialog_loading"/>
 
             <LinearLayout
                 android:id="@+id/ll_linear"

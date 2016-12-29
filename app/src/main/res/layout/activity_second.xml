@@ -14,77 +14,117 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.kk.taurus.pluginskin.MainActivity">
 
-    <TextView
-        android:id="@+id/tv_change"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#44000000"
-        android:gravity="center"
-        android:textSize="16sp"
-        android:textColor="#000000"
-        android:text="change"/>
+        android:layout_height="match_parent"
+        android:background="#00000000">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_change"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/selector_text_button"
+                android:focusable="true"
+                android:clickable="true"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:text="change"/>
 
-    <TextView
-        android:id="@+id/tv_default"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#44000000"
-        android:layout_marginTop="5dp"
-        android:gravity="center"
-        android:textSize="16sp"
-        android:textColor="#000000"
-        android:text="default"/>
+            <TextView
+                android:id="@+id/tv_default"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/selector_text_button"
+                android:focusable="true"
+                android:clickable="true"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:text="default"/>
 
-    <TextView
-        android:id="@+id/tv_font_hksnt"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#44000000"
-        android:layout_marginTop="5dp"
-        android:gravity="center"
-        android:textSize="16sp"
-        android:textColor="#000000"
-        android:text="华康少女字体"/>
+            <TextView
+                android:id="@+id/tv_font_hksnt"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/selector_text_button"
+                android:focusable="true"
+                android:clickable="true"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:text="华康少女字体"/>
 
-    <TextView
-        android:id="@+id/tv_font_kt"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#44000000"
-        android:layout_marginTop="5dp"
-        android:gravity="center"
-        android:textSize="16sp"
-        android:textColor="#000000"
-        android:text="楷体"/>
+            <TextView
+                android:id="@+id/tv_font_kt"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/selector_text_button"
+                android:focusable="true"
+                android:clickable="true"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:text="楷体"/>
 
-    <TextView
-        android:id="@+id/tv_font_default"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#44000000"
-        android:layout_marginTop="5dp"
-        android:gravity="center"
-        android:textSize="16sp"
-        android:textColor="#000000"
-        android:text="默认字体"/>
+            <TextView
+                android:id="@+id/tv_font_default"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/selector_text_button"
+                android:focusable="true"
+                android:clickable="true"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:text="默认字体"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="center"
-        android:layout_marginTop="30dp"
-        skin:enable="true"
-        android:textSize="18sp"
-        android:background="@color/tv_test_bg"
-        android:textColor="@color/tv_test_text_color"
-        android:text="test_skin_text"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:layout_marginTop="30dp"
+                android:focusable="true"
+                skin:enable="true"
+                android:textSize="18sp"
+                android:background="@color/tv_test_bg"
+                android:textColor="@drawable/selector_test"
+                android:text="test_skin_text"/>
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="30dp"
-        skin:enable="true"
-        android:scaleType="centerInside"
-        android:src="@mipmap/ic_launcher_test_icon"/>
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                skin:enable="true"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_launcher_test_icon_patch"/>
+
+            <ProgressBar
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:indeterminateDuration="600"
+                skin:enable="true"
+                android:indeterminateDrawable="@drawable/draw_dialog_loading"/>
+
+            <LinearLayout
+                android:id="@+id/ll_linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
 
 </LinearLayout>

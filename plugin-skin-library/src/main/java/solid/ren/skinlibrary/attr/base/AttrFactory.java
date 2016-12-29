@@ -1,8 +1,8 @@
 package solid.ren.skinlibrary.attr.base;
 
 import java.util.HashMap;
-
 import solid.ren.skinlibrary.attr.BackgroundAttr;
+import solid.ren.skinlibrary.attr.ProgressBarIndeterminateDrawable;
 import solid.ren.skinlibrary.attr.SrcAttr;
 import solid.ren.skinlibrary.attr.TextColorAttr;
 import solid.ren.skinlibrary.utils.SkinL;
@@ -22,6 +22,7 @@ public class AttrFactory {
         mSupportAttr.put("background", new BackgroundAttr());
         mSupportAttr.put("textColor", new TextColorAttr());
         mSupportAttr.put("src", new SrcAttr());
+        mSupportAttr.put("indeterminateDrawable", new ProgressBarIndeterminateDrawable());
     }
 
 
