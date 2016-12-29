@@ -43,15 +43,17 @@ public class SkinInflaterFactory implements LayoutInflaterFactory {
         AppCompatDelegate delegate = mAppCompatActivity.getDelegate();
         View view = delegate.createView(parent, name, context, attrs);
 
+        if (view == null) {
+            // view = createView(context, name, attrs);
+            view = ViewProducer.createViewFromTag(context, name, attrs);
+        }
+
         if (view instanceof TextView) {
             TextViewRepository.add((TextView) view);
         }
 
         if (isSkinEnable) {
-            if (view == null) {
-                // view = createView(context, name, attrs);
-                view = ViewProducer.createViewFromTag(context, name, attrs);
-            }
+
             if (view == null) {
                 return null;
             }
