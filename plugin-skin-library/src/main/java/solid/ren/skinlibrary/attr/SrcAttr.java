@@ -2,9 +2,7 @@ package solid.ren.skinlibrary.attr;
 
 import android.graphics.drawable.Drawable;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-
 import solid.ren.skinlibrary.attr.base.SkinAttr;
 import solid.ren.skinlibrary.loader.SkinManager;
 
@@ -17,15 +15,17 @@ import solid.ren.skinlibrary.loader.SkinManager;
 public class SrcAttr extends SkinAttr {
     @Override
     public void apply(View view) {
-        if(RES_TYPE_NAME_DRAWABLE.equals(attrValueTypeName)
-                || RES_TYPE_NAME_DRAWABLE.equals(attrValueTypeName)){
-            Drawable bg = SkinManager.getInstance().getDrawable(attrValueRefId);
-            if(view instanceof ImageView){
-                ((ImageView)view).setImageDrawable(bg);
-            }
-            if(view instanceof ImageButton){
-                ((ImageButton)view).setImageDrawable(bg);
-            }
+        Drawable bg = null;
+        if(RES_TYPE_NAME_DRAWABLE.equals(attrValueTypeName)){
+            bg = SkinManager.getInstance().getDrawable(ResourceType.Drawable,attrValueRefId);
+        }else if(RES_TYPE_NAME_MIPMAP.equals(attrValueTypeName)){
+            bg = SkinManager.getInstance().getDrawable(ResourceType.Mipmap,attrValueRefId);
         }
+        if(bg == null)
+            return;
+        if(view instanceof ImageView){
+            ((ImageView)view).setImageDrawable(bg);
+        }
+
     }
 }

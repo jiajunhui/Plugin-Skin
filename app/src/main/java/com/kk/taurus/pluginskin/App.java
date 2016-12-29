@@ -5,6 +5,7 @@ import com.xapp.jjh.logtools.logger.LogLevel;
 import com.xapp.jjh.logtools.tools.XLog;
 
 import solid.ren.skinlibrary.base.SkinBaseApplication;
+import solid.ren.skinlibrary.config.SkinConfig;
 
 /**
  * Created by Taurus on 16/12/4.
@@ -19,5 +20,6 @@ public class App extends SkinBaseApplication {
                 .setMessageTable(true)
                 .setLogDir(getExternalCacheDir())
                 .setSaveCrashLog(true));
+        SkinConfig.setGradientChangeColor(true);
     }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
-        <bitmap android:src="@mipmap/ic_launcher"/>
+        <bitmap android:src="@mipmap/ic_launcher_test_icon"/>
     </item>
 </selector>

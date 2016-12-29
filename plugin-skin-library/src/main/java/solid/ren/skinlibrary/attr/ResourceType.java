@@ -6,7 +6,7 @@ package solid.ren.skinlibrary.attr;
 
 public enum ResourceType {
 
-    Color("color"),Drawable("drawable"),Bool("bool")
+    Color("color"),Drawable("drawable"),Bool("bool"),Mipmap("mipmap")
     ;
 
     String str;

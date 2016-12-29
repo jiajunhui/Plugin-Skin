@@ -40,7 +40,10 @@ public class BackgroundAttr extends SkinAttr {
                 }
             }
         } else if (RES_TYPE_NAME_DRAWABLE.equals(attrValueTypeName)) {
-            Drawable bg = SkinManager.getInstance().getDrawable(attrValueRefId);
+            Drawable bg = SkinManager.getInstance().getDrawable(ResourceType.Drawable,attrValueRefId);
+            view.setBackgroundDrawable(bg);
+        } else if (RES_TYPE_NAME_MIPMAP.equals(attrValueTypeName)) {
+            Drawable bg = SkinManager.getInstance().getDrawable(ResourceType.Mipmap,attrValueRefId);
             view.setBackgroundDrawable(bg);
         }
     }

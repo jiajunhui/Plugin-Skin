@@ -393,14 +393,14 @@ public class SkinManager implements ISkinLoader {
      * @param resId
      * @return if resource null , return default resource drawable.
      */
-    public Drawable getDrawable(int resId) {
+    public Drawable getDrawable(ResourceType resourceType,int resId) {
         Drawable originDrawable = context.getResources().getDrawable(resId);
         if (mResources == null || isDefaultSkin) {
             return originDrawable;
         }
         String resName = context.getResources().getResourceEntryName(resId);
 
-        int trueResId = mResources.getIdentifier(resName, ResourceType.Drawable.getStr(), skinPackageName);
+        int trueResId = mResources.getIdentifier(resName, resourceType.getStr(), skinPackageName);
 
         Drawable trueDrawable = null;
         try {
@@ -429,7 +429,7 @@ public class SkinManager implements ISkinLoader {
      * @return
      * @author pinotao
      */
-    public ColorStateList getColorStateList(int resId) {
+    public ColorStateList getColorStateList(ResourceType resourceType, int resId) {
         boolean isExtendSkin = true;
         if (mResources == null || isDefaultSkin) {
             isExtendSkin = false;
@@ -437,7 +437,7 @@ public class SkinManager implements ISkinLoader {
 
         String resName = context.getResources().getResourceEntryName(resId);
         if (isExtendSkin) {
-            int trueResId = mResources.getIdentifier(resName, ResourceType.Color.getStr(), skinPackageName);
+            int trueResId = mResources.getIdentifier(resName, resourceType.getStr(), skinPackageName);
             ColorStateList trueColorList = null;
             //If the package is not the skin of carbon resources,
             // but the need to determine whether it is ColorStateList
