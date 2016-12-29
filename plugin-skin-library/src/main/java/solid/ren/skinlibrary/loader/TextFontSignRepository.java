@@ -1,11 +1,9 @@
 package solid.ren.skinlibrary.loader;
 
 import android.graphics.Typeface;
-import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
-
+import solid.ren.skinlibrary.attr.base.TextFontAttrSign;
 import solid.ren.skinlibrary.utils.TypefaceUtils;
 
 /**
@@ -13,21 +11,21 @@ import solid.ren.skinlibrary.utils.TypefaceUtils;
  * Date:2016/7/12
  * Time:17:58
  */
-public class TextViewRepository {
+public class TextFontSignRepository {
 
-    private static List<TextView> mTextViews = new ArrayList<>();
+    private List<TextFontAttrSign> mTextViews = new ArrayList<>();
 
-    public static void add(TextView textView) {
+    public void add(TextFontAttrSign textView) {
         mTextViews.add(textView);
         textView.setTypeface(TypefaceUtils.CURRENT_TYPEFACE);
     }
 
-    public static void clear() {
+    public void clear() {
         mTextViews.clear();
     }
 
-    public static void applyFont(Typeface tf) {
-        for (TextView textView : mTextViews) {
+    public void applyFont(Typeface tf) {
+        for (TextFontAttrSign textView : mTextViews) {
             textView.setTypeface(tf);
         }
     }

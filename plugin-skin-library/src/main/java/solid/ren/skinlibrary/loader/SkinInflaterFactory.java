@@ -13,6 +13,7 @@ import java.util.List;
 import solid.ren.skinlibrary.attr.base.AttrFactory;
 import solid.ren.skinlibrary.attr.base.DynamicAttr;
 import solid.ren.skinlibrary.attr.base.SkinAttr;
+import solid.ren.skinlibrary.attr.base.TextFontAttrSign;
 import solid.ren.skinlibrary.config.SkinConfig;
 import solid.ren.skinlibrary.entity.SkinItem;
 import solid.ren.skinlibrary.utils.SkinL;
@@ -34,6 +35,10 @@ public class SkinInflaterFactory implements LayoutInflaterFactory {
      */
     private List<SkinItem> mSkinItems = new ArrayList<>();
 
+    private TextFontSignRepository textFontSignRepository = new TextFontSignRepository();
+
+    private List<TextView> mTextViews = new ArrayList<>();
+
     private AppCompatActivity mAppCompatActivity;
 
     @Override
@@ -50,6 +55,8 @@ public class SkinInflaterFactory implements LayoutInflaterFactory {
 
         if (view instanceof TextView) {
             TextViewRepository.add((TextView) view);
+        }else if(view instanceof TextFontAttrSign){
+            textFontSignRepository.add((TextFontAttrSign)view);
         }
 
         if (isSkinEnable) {

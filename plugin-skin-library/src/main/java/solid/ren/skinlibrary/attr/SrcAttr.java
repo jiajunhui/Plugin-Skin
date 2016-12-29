@@ -3,9 +3,9 @@ package solid.ren.skinlibrary.attr;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
+import solid.ren.skinlibrary.attr.base.ImageDrawableAttrSign;
 import solid.ren.skinlibrary.attr.base.SkinAttr;
 import solid.ren.skinlibrary.loader.SkinManager;
-import solid.ren.skinlibrary.utils.ReflectMethod;
 
 /**
  * Created by Taurus on 16/12/4.
@@ -26,8 +26,8 @@ public class SrcAttr extends SkinAttr {
             return;
         if(view instanceof ImageView){
             ((ImageView)view).setImageDrawable(bg);
-        }else{
-            ReflectMethod.reflectSetImageDrawable(view,bg);
+        }else if(view instanceof ImageDrawableAttrSign){
+            ((ImageDrawableAttrSign)view).setImageDrawable(bg);
         }
 
     }
