@@ -1,6 +1,7 @@
 package solid.ren.skinlibrary.base;
 
 import android.annotation.SuppressLint;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.LayoutInflaterCompat;
@@ -12,9 +13,12 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import java.util.List;
 import solid.ren.skinlibrary.attr.base.DynamicAttr;
+import solid.ren.skinlibrary.attr.base.TextFontAttrSign;
 import solid.ren.skinlibrary.config.SkinConfig;
 import solid.ren.skinlibrary.listener.IDynamicNewView;
+import solid.ren.skinlibrary.listener.IFontUpdate;
 import solid.ren.skinlibrary.listener.ISkinUpdate;
+import solid.ren.skinlibrary.loader.FontManager;
 import solid.ren.skinlibrary.loader.SkinInflaterFactory;
 import solid.ren.skinlibrary.loader.SkinManager;
 
@@ -27,7 +31,7 @@ import solid.ren.skinlibrary.loader.SkinManager;
  * if you activity need change skin . please extend this activity.
  *
  */
-public class SkinBaseActivity extends AppCompatActivity implements ISkinUpdate, IDynamicNewView {
+public class SkinBaseActivity extends AppCompatActivity implements ISkinUpdate, IDynamicNewView ,IFontUpdate{
 
     private SkinInflaterFactory mSkinInflaterFactory;
 
@@ -44,12 +48,14 @@ public class SkinBaseActivity extends AppCompatActivity implements ISkinUpdate, 
     protected void onResume() {
         super.onResume();
         SkinManager.getInstance().attach(this);
+        FontManager.getInstance().attach(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         SkinManager.getInstance().detach(this);
+        FontManager.getInstance().detach(this);
         mSkinInflaterFactory.clean();
     }
 
@@ -58,6 +64,11 @@ public class SkinBaseActivity extends AppCompatActivity implements ISkinUpdate, 
         Log.i("SkinBaseActivity", "onThemeUpdate");
         mSkinInflaterFactory.applySkin();
         changeStatusColor();
+    }
+
+    @Override
+    public void onFontUpdate(Typeface typeface) {
+        mSkinInflaterFactory.applyFont(typeface);
     }
 
     public void changeStatusColor() {
@@ -113,4 +124,8 @@ public class SkinBaseActivity extends AppCompatActivity implements ISkinUpdate, 
         mSkinInflaterFactory.dynamicAddFontEnableView(textView);
     }
 
+    @Override
+    public void dynamicAddFontView(TextFontAttrSign textFontView) {
+        mSkinInflaterFactory.dynamicAddFontEnableView(textFontView);
+    }
 }

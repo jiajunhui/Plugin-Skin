@@ -6,6 +6,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import solid.ren.skinlibrary.attr.base.DynamicAttr;
+import solid.ren.skinlibrary.attr.base.TextFontAttrSign;
 
 /**
  * Created by _SOLID
@@ -23,4 +24,5 @@ public interface IDynamicNewView {
      * @param textView textview
      */
     void dynamicAddFontView(TextView textView);
+    void dynamicAddFontView(TextFontAttrSign textFontView);
 }
