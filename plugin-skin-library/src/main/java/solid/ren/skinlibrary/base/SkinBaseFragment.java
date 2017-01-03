@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 import java.util.List;
 import solid.ren.skinlibrary.attr.base.DynamicAttr;
+import solid.ren.skinlibrary.attr.base.TextFontAttrSign;
 import solid.ren.skinlibrary.listener.IDynamicNewView;
 
 /**
@@ -46,6 +47,11 @@ public class SkinBaseFragment extends Fragment implements IDynamicNewView {
     @Override
     public void dynamicAddFontView(TextView textView) {
         mIDynamicNewView.dynamicAddFontView(textView);
+    }
+
+    @Override
+    public void dynamicAddFontView(TextFontAttrSign textFontView) {
+        mIDynamicNewView.dynamicAddFontView(textFontView);
     }
 
     public LayoutInflater getLayoutInflater(Bundle savedInstanceState) {

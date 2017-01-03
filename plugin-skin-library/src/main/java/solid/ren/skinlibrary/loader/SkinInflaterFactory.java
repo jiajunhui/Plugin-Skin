@@ -2,6 +2,7 @@ package solid.ren.skinlibrary.loader;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.support.v4.view.LayoutInflaterFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
@@ -35,9 +36,7 @@ public class SkinInflaterFactory implements LayoutInflaterFactory {
      */
     private List<SkinItem> mSkinItems = new ArrayList<>();
 
-    private TextFontSignRepository textFontSignRepository = new TextFontSignRepository();
-
-    private List<TextView> mTextViews = new ArrayList<>();
+    private TextFontContainer mTextFontContainer = new TextFontContainer();
 
     private AppCompatActivity mAppCompatActivity;
 
@@ -54,9 +53,9 @@ public class SkinInflaterFactory implements LayoutInflaterFactory {
         }
 
         if (view instanceof TextView) {
-            TextViewRepository.add((TextView) view);
+            mTextFontContainer.add((TextView)view);
         }else if(view instanceof TextFontAttrSign){
-            textFontSignRepository.add((TextFontAttrSign)view);
+            mTextFontContainer.add((TextFontAttrSign)view);
         }
 
         if (isSkinEnable) {
@@ -150,6 +149,10 @@ public class SkinInflaterFactory implements LayoutInflaterFactory {
         }
     }
 
+    public void applyFont(Typeface typeface){
+        mTextFontContainer.applyFont(typeface);
+    }
+
     /**
      * clear the skins attrs list.
      */
@@ -218,7 +221,11 @@ public class SkinInflaterFactory implements LayoutInflaterFactory {
 
 
     public void dynamicAddFontEnableView(TextView textView) {
-        TextViewRepository.add(textView);
+        mTextFontContainer.add(textView);
+    }
+
+    public void dynamicAddFontEnableView(TextFontAttrSign textFontView) {
+        mTextFontContainer.add(textFontView);
     }
 
 }

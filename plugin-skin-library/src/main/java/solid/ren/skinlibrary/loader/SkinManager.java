@@ -330,8 +330,7 @@ public class SkinManager implements ISkinLoader {
 
     public void loadFont(String fontName) {
         Typeface tf = TypefaceUtils.createTypeface(context, fontName);
-        TextViewRepository.applyFont(tf);
-//        TextFontSignRepository.applyFont(tf);
+        FontManager.getInstance().notifyFontUpdate(tf);
     }
 
     /**
