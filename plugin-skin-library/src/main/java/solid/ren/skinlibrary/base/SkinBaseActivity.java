@@ -13,7 +13,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import java.util.List;
 import solid.ren.skinlibrary.attr.base.DynamicAttr;
-import solid.ren.skinlibrary.attr.base.TextFontAttrSign;
+import solid.ren.skinlibrary.attr.sign_inter.TextFontAttrSign;
 import solid.ren.skinlibrary.config.SkinConfig;
 import solid.ren.skinlibrary.listener.IDynamicNewView;
 import solid.ren.skinlibrary.listener.IFontUpdate;

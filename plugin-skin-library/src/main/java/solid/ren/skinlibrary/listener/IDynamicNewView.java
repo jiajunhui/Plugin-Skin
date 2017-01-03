@@ -6,7 +6,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import solid.ren.skinlibrary.attr.base.DynamicAttr;
-import solid.ren.skinlibrary.attr.base.TextFontAttrSign;
+import solid.ren.skinlibrary.attr.sign_inter.TextFontAttrSign;
 
 /**
  * Created by _SOLID

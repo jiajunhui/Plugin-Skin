@@ -1,9 +1,11 @@
-package solid.ren.skinlibrary.attr;
+package solid.ren.skinlibrary.attr.support;
 
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
-import solid.ren.skinlibrary.attr.base.ImageDrawableAttrSign;
+
+import solid.ren.skinlibrary.attr.base.ResourceType;
+import solid.ren.skinlibrary.attr.sign_inter.ImageDrawableAttrSign;
 import solid.ren.skinlibrary.attr.base.SkinAttr;
 import solid.ren.skinlibrary.loader.SkinManager;
 

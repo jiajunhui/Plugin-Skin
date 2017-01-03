@@ -2,7 +2,7 @@ package solid.ren.skinlibrary.config;
 
 import android.content.Context;
 
-import solid.ren.skinlibrary.attr.base.AttrFactory;
+import solid.ren.skinlibrary.attr.AttrFactory;
 import solid.ren.skinlibrary.attr.base.SkinAttr;
 import solid.ren.skinlibrary.utils.SkinPreferencesUtils;
 

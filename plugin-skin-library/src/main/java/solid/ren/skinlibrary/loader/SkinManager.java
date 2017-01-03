@@ -18,7 +18,7 @@ import java.io.File;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-import solid.ren.skinlibrary.attr.ResourceType;
+import solid.ren.skinlibrary.attr.base.ResourceType;
 import solid.ren.skinlibrary.config.SkinConfig;
 import solid.ren.skinlibrary.config.StatusConfig;
 import solid.ren.skinlibrary.listener.ILoaderListener;

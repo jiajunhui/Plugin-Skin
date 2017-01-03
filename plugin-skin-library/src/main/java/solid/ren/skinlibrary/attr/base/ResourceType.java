@@ -1,4 +1,4 @@
-package solid.ren.skinlibrary.attr;
+package solid.ren.skinlibrary.attr.base;
 
 /**
  * Created by Taurus on 16/12/7.

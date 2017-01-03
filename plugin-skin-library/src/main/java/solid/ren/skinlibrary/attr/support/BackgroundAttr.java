@@ -1,10 +1,12 @@
-package solid.ren.skinlibrary.attr;
+package solid.ren.skinlibrary.attr.support;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.CardView;
 import android.view.View;
+
+import solid.ren.skinlibrary.attr.base.ResourceType;
 import solid.ren.skinlibrary.attr.base.SkinAttr;
 import solid.ren.skinlibrary.config.SkinConfig;
 import solid.ren.skinlibrary.loader.SkinManager;

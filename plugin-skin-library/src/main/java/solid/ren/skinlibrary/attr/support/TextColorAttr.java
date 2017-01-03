@@ -1,10 +1,12 @@
-package solid.ren.skinlibrary.attr;
+package solid.ren.skinlibrary.attr.support;
 
 import android.content.res.ColorStateList;
 import android.view.View;
 import android.widget.TextView;
+
+import solid.ren.skinlibrary.attr.base.ResourceType;
 import solid.ren.skinlibrary.attr.base.SkinAttr;
-import solid.ren.skinlibrary.attr.base.TextColorAttrSign;
+import solid.ren.skinlibrary.attr.sign_inter.TextColorAttrSign;
 import solid.ren.skinlibrary.loader.SkinManager;
 
 /**

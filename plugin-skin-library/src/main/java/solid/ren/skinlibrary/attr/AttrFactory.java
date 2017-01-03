@@ -1,10 +1,13 @@
-package solid.ren.skinlibrary.attr.base;
+package solid.ren.skinlibrary.attr;
 
 import java.util.HashMap;
-import solid.ren.skinlibrary.attr.BackgroundAttr;
-import solid.ren.skinlibrary.attr.ProgressBarIndeterminateDrawable;
-import solid.ren.skinlibrary.attr.SrcAttr;
-import solid.ren.skinlibrary.attr.TextColorAttr;
+
+import solid.ren.skinlibrary.attr.base.SkinAttr;
+import solid.ren.skinlibrary.attr.support.BackgroundAttr;
+import solid.ren.skinlibrary.attr.support.ProgressBarIndeterminateDrawableAttr;
+import solid.ren.skinlibrary.attr.support.SeekBarProgressDrawableAttr;
+import solid.ren.skinlibrary.attr.support.SrcAttr;
+import solid.ren.skinlibrary.attr.support.TextColorAttr;
 import solid.ren.skinlibrary.utils.SkinL;
 
 /**
@@ -16,13 +19,20 @@ public class AttrFactory {
 
     private static String TAG = "AttrFactory";
 
+    public static final String SUPPORT_ATTR_NAME_BACKGROUND                 = "background";
+    public static final String SUPPORT_ATTR_NAME_TEXT_COLOR                 = "textColor";
+    public static final String SUPPORT_ATTR_NAME_SRC                        = "src";
+    public static final String SUPPORT_ATTR_NAME_INDETERMINATE_DRAWABLE     = "indeterminateDrawable";
+    public static final String SUPPORT_ATTR_NAME_PROGRESS_DRAWABLE          = "progressDrawable";
+
     public static HashMap<String, SkinAttr> mSupportAttr = new HashMap<>();
 
     static {
-        mSupportAttr.put("background", new BackgroundAttr());
-        mSupportAttr.put("textColor", new TextColorAttr());
-        mSupportAttr.put("src", new SrcAttr());
-        mSupportAttr.put("indeterminateDrawable", new ProgressBarIndeterminateDrawable());
+        mSupportAttr.put(SUPPORT_ATTR_NAME_BACKGROUND, new BackgroundAttr());
+        mSupportAttr.put(SUPPORT_ATTR_NAME_TEXT_COLOR, new TextColorAttr());
+        mSupportAttr.put(SUPPORT_ATTR_NAME_SRC, new SrcAttr());
+        mSupportAttr.put(SUPPORT_ATTR_NAME_INDETERMINATE_DRAWABLE, new ProgressBarIndeterminateDrawableAttr());
+        mSupportAttr.put(SUPPORT_ATTR_NAME_PROGRESS_DRAWABLE, new SeekBarProgressDrawableAttr());
     }
 
 

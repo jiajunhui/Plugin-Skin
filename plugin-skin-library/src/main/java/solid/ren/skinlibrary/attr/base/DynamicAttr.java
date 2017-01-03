@@ -1,6 +1,8 @@
 package solid.ren.skinlibrary.attr.base;
 
 
+import solid.ren.skinlibrary.attr.AttrFactory;
+
 /**
  * Created by _SOLID
  * Date:2016/4/14

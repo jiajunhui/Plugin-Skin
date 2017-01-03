@@ -1,9 +1,7 @@
 package com.kk.taurus.pluginskin;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +10,6 @@ import android.widget.TextView;
 
 import com.xapp.jjh.logtools.tools.XLog;
 
-import solid.ren.skinlibrary.attr.ResourceType;
 import solid.ren.skinlibrary.base.SkinBaseActivity;
 import solid.ren.skinlibrary.listener.ILoaderListener;
 import solid.ren.skinlibrary.loader.SkinManager;

@@ -1,4 +1,4 @@
-package solid.ren.skinlibrary.attr.base;
+package solid.ren.skinlibrary.attr.sign_inter;
 
 import android.content.res.ColorStateList;
 
